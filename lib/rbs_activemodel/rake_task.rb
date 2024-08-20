@@ -29,7 +29,7 @@ module RbsActivemodel
 
     def define_generate_task
       desc "Generate RBS files for activemodel gem"
-      task "#{name}:generate" do
+      task("#{name}:generate": :environment) do
         require "rbs_activemodel" # load RbsActivemodel lazily
 
         Rails.application.eager_load!
@@ -47,7 +47,7 @@ module RbsActivemodel
 
     def define_clean_task
       desc "Clean RBS files for config gem"
-      task "#{name}:clean" do
+      task("#{name}:clean": :environment) do
         signature_root_dir.rmtree if signature_root_dir.exist?
       end
     end

@@ -1,6 +1,22 @@
 ---
 path: ".gem_rbs_collection"
 gems:
+- name: actionpack
+  version: '6.0'
+  source:
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: 3ff00fb82aa9e9fc72eb60a8172f664f25e7cbad
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
+- name: actionview
+  version: '6.0'
+  source:
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: 3ff00fb82aa9e9fc72eb60a8172f664f25e7cbad
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
 - name: activemodel
   version: '7.0'
   source:
@@ -33,6 +49,10 @@ gems:
   version: '0'
   source:
     type: stdlib
+- name: cgi
+  version: '0'
+  source:
+    type: stdlib
 - name: concurrent-ruby
   version: '1.1'
   source:
@@ -53,6 +73,10 @@ gems:
   version: '0'
   source:
     type: stdlib
+- name: dbm
+  version: '0'
+  source:
+    type: stdlib
 - name: erb
   version: '0'
   source:
@@ -69,6 +93,10 @@ gems:
     revision: 3ff00fb82aa9e9fc72eb60a8172f664f25e7cbad
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
+- name: io-console
+  version: '0'
+  source:
+    type: stdlib
 - name: json
   version: '0'
   source:
@@ -89,6 +117,14 @@ gems:
   version: '0'
   source:
     type: stdlib
+- name: nokogiri
+  version: '1.11'
+  source:
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: 3ff00fb82aa9e9fc72eb60a8172f664f25e7cbad
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
 - name: optparse
   version: '0'
   source:
@@ -113,6 +149,38 @@ gems:
   version: '0'
   source:
     type: stdlib
+- name: pstore
+  version: '0'
+  source:
+    type: stdlib
+- name: psych
+  version: '0'
+  source:
+    type: stdlib
+- name: rack
+  version: '2.2'
+  source:
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: 3ff00fb82aa9e9fc72eb60a8172f664f25e7cbad
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
+- name: rails-dom-testing
+  version: '2.0'
+  source:
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: 3ff00fb82aa9e9fc72eb60a8172f664f25e7cbad
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
+- name: railties
+  version: '6.0'
+  source:
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: 3ff00fb82aa9e9fc72eb60a8172f664f25e7cbad
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
 - name: rainbow
   version: '3.0'
   source:
@@ -173,6 +241,18 @@ gems:
   version: '0'
   source:
     type: stdlib
+- name: tempfile
+  version: '0'
+  source:
+    type: stdlib
+- name: thor
+  version: '1.2'
+  source:
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: 3ff00fb82aa9e9fc72eb60a8172f664f25e7cbad
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
 - name: time
   version: '0'
   source:
@@ -193,4 +273,8 @@ gems:
     revision: 3ff00fb82aa9e9fc72eb60a8172f664f25e7cbad
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
+- name: uri
+  version: '0'
+  source:
+    type: stdlib
 gemfile_lock_path: Gemfile.lock

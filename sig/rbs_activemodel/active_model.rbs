@@ -1,0 +1,26 @@
+module RbsActivemodel
+  module ActiveModel
+    def self.all: () -> Array[Class]
+    def self.class_to_rbs: (Class klass) -> String?
+
+    class Generator
+      MIXINS: Array[Module]
+      TYPES: Hash[Symbol, untyped]
+
+      def initialize: (Class klass) -> void
+      def generate: () -> String?
+
+      private
+
+      attr_reader klass: Class
+      attr_reader klass_name: String
+
+      def format: (String rbs) -> String
+      def header: () -> String
+      def mixins: () -> String
+      def attributes: () -> String
+      def footer: () -> String
+      def required_attribute?: (String name) -> bool
+    end
+  end
+end

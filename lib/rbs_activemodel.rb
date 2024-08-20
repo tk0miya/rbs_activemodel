@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "rbs_activemodel/active_model"
 require_relative "rbs_activemodel/version"
 
 module RbsActivemodel

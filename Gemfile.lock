@@ -2,10 +2,14 @@ PATH
   remote: .
   specs:
     rbs_activemodel (0.1.0)
+      activemodel
+      rbs
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activemodel (7.2.0)
+      activesupport (= 7.2.0)
     activesupport (7.2.0)
       base64
       bigdecimal

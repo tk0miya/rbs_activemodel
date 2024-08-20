@@ -11,7 +11,7 @@ module RbsActivemodel
         begin
           require 'rbs_activemodel/rake_task'
 
-          RbsActiveModel::RakeTask.new do |task|
+          RbsActivemodel::RakeTask.new do |task|
           end
         rescue LoadError
           # failed to load rbs_activemodel. Skip to load rbs_activemodel tasks.

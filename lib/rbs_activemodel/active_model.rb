@@ -26,7 +26,7 @@ module RbsActivemodel
         binary: String,
         boolean: :bool,
         date: Date,
-        datetime: DateTime,
+        datetime: "DateTime | ActiveSupport::TimeWithZone",
         decimal: BigDecimal,
         float: Float,
         immutable_string: String,
@@ -100,7 +100,14 @@ module RbsActivemodel
         model = klass
         model.attribute_types.map do |name, type|
           type = TYPES.fetch(type.type, :untyped)
-          type_name = type.is_a?(Class) ? type.name : type.to_s
+          type_name = case type
+                      when Class
+                        type.name
+                      when String
+                        "(#{type})"
+                      else
+                        type.to_s
+                      end
           suffix = "?" unless required_attribute?(name)
           <<~RBS
             def #{name}: () -> #{type_name}#{suffix}

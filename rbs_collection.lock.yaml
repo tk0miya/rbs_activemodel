@@ -25,6 +25,14 @@ gems:
     revision: 3ff00fb82aa9e9fc72eb60a8172f664f25e7cbad
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
+- name: activerecord
+  version: '7.1'
+  source:
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: 27212b1cd6c4d58b6a0d57f0b462b3bd8242636b
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
 - name: activesupport
   version: '7.0'
   source:

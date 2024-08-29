@@ -3,7 +3,11 @@ AllCops:
 
 Metrics/BlockLength:
   Exclude:
+    - 'rbs_activemodel.gemspec'
     - 'spec/**/*.rb'
+
+Metrics/CyclomaticComplexity:
+  Max: 10
 
 Metrics/MethodLength:
   Max: 20

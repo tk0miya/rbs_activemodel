@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "active_model"
+require "active_record"
 require "bigdecimal"
 require "date"
 require "rbs"
@@ -41,7 +42,7 @@ module RbsActivemodel
       end
 
       def generate
-        return if mixins.empty?
+        return if mixins.empty? && attributes.empty?
 
         format <<~RBS
           #{header}
@@ -85,7 +86,9 @@ module RbsActivemodel
       end
 
       def mixins
-        MIXINS.each_with_object([]) do |mod, mixins|
+        return "" if klass < ActiveRecord::Base
+
+        @mixins ||= MIXINS.each_with_object([]) do |mod, mixins|
           if klass < mod
             mixins << "include ::#{mod.name}"
             mixins << "extend  ::#{mod.name}::ClassMethods" if mod.const_defined?(:ClassMethods)
@@ -94,11 +97,11 @@ module RbsActivemodel
       end
 
       def attributes
-        return "" unless klass < ::ActiveModel::Attributes
+        return "" unless klass < ::ActiveModel::Attributes || klass < ::ActiveRecord::Attributes
 
         # @type var model: untyped
         model = klass
-        model.attribute_types.map do |name, type|
+        @attributes ||= model.attribute_types.map do |name, type|
           type = TYPES.fetch(type.type, :untyped)
           type_name = case type
                       when Class

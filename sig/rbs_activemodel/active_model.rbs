@@ -5,7 +5,7 @@ module RbsActivemodel
 
     class Generator
       MIXINS: Array[Module]
-      TYPES: Hash[Symbol, untyped]
+      TYPES: Hash[Symbol, Class | String | Symbol]
 
       def initialize: (Class klass) -> void
       def generate: () -> String?

@@ -89,6 +89,7 @@ RSpec.describe RbsActivemodel::ActiveModel do
               include ActiveModel::Attributes
 
               attribute :age, :integer
+              attribute :created_at, :datetime
             end
           end
           let(:expected) do
@@ -99,6 +100,9 @@ RSpec.describe RbsActivemodel::ActiveModel do
 
                 def age: () -> Integer?
                 def age=: (Integer? value) -> Integer?
+
+                def created_at: () -> (DateTime | ActiveSupport::TimeWithZone)?
+                def created_at=: ((DateTime | ActiveSupport::TimeWithZone)? value) -> (DateTime | ActiveSupport::TimeWithZone)?
               end
             RBS
           end

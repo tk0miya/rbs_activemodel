@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require "active_record"
 require "rbs_activemodel"
+
+ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
+ActiveRecord::Base.connection.create_table(:foos)
 
 RSpec.describe RbsActivemodel::ActiveModel do
   describe ".class_to_rbs" do
@@ -109,6 +113,27 @@ RSpec.describe RbsActivemodel::ActiveModel do
 
           it { is_expected.to eq expected }
         end
+      end
+
+      context "When the class is a subclass of ActiveRecord::Base" do
+        let(:klass) do
+          Class.new(ActiveRecord::Base) do
+            attribute :name, :string
+          end
+        end
+        let(:expected) do
+          <<~RBS
+            class Foo < ::ActiveRecord::Base
+              def id: () -> Integer?
+              def id=: (Integer? value) -> Integer?
+
+              def name: () -> String?
+              def name=: (String? value) -> String?
+            end
+          RBS
+        end
+
+        it { is_expected.to eq expected }
       end
     end
   end

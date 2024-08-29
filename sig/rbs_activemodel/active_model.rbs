@@ -7,6 +7,9 @@ module RbsActivemodel
       MIXINS: Array[Module]
       TYPES: Hash[Symbol, Class | String | Symbol]
 
+      @mixins: String
+      @attributes: String
+
       def initialize: (Class klass) -> void
       def generate: () -> String?
 

@@ -121,19 +121,8 @@ RSpec.describe RbsActivemodel::ActiveModel do
             attribute :name, :string
           end
         end
-        let(:expected) do
-          <<~RBS
-            class Foo < ::ActiveRecord::Base
-              def id: () -> Integer?
-              def id=: (Integer? value) -> Integer?
 
-              def name: () -> String?
-              def name=: (String? value) -> String?
-            end
-          RBS
-        end
-
-        it { is_expected.to eq expected }
+        it { is_expected.to eq nil }
       end
     end
   end

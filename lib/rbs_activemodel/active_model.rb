@@ -97,7 +97,7 @@ module RbsActivemodel
       end
 
       def attributes
-        return "" unless klass < ::ActiveModel::Attributes || klass < ::ActiveRecord::Attributes
+        return "" unless klass < ::ActiveModel::Attributes
 
         # @type var model: untyped
         model = klass

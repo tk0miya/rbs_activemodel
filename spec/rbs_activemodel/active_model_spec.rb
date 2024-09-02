@@ -78,6 +78,7 @@ RSpec.describe RbsActivemodel::ActiveModel do
                 include ::ActiveModel::Validations
                 extend ::ActiveModel::Validations::ClassMethods
 
+                %a{pure}
                 def name: () -> String
                 def name=: (String value) -> String
               end
@@ -102,9 +103,11 @@ RSpec.describe RbsActivemodel::ActiveModel do
                 include ::ActiveModel::Attributes
                 extend ::ActiveModel::Attributes::ClassMethods
 
+                %a{pure}
                 def age: () -> Integer?
                 def age=: (Integer? value) -> Integer?
 
+                %a{pure}
                 def created_at: () -> (DateTime | ActiveSupport::TimeWithZone)?
                 def created_at=: ((DateTime | ActiveSupport::TimeWithZone)? value) -> (DateTime | ActiveSupport::TimeWithZone)?
               end

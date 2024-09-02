@@ -113,6 +113,7 @@ module RbsActivemodel
                       end
           suffix = "?" unless required_attribute?(name)
           <<~RBS
+            %a{pure}
             def #{name}: () -> #{type_name}#{suffix}
             def #{name}=: (#{type_name}#{suffix} value) -> #{type_name}#{suffix}
           RBS

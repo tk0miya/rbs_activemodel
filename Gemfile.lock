@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rbs_activemodel (1.1.1)
+    rbs_activemodel (1.2.0)
       activemodel
       activerecord
       railties

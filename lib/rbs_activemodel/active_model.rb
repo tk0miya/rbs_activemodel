@@ -21,7 +21,8 @@ module RbsActivemodel
     end
 
     class Generator
-      MIXINS = [::ActiveModel::Model, ::ActiveModel::Attributes, ::ActiveModel::Validations].freeze
+      MIXINS = [::ActiveModel::Model, ::ActiveModel::Attributes,
+                ::ActiveModel::SecurePassword, ::ActiveModel::Validations].freeze
       TYPES = {
         big_integer: Integer,
         binary: String,
@@ -42,11 +43,13 @@ module RbsActivemodel
       end
 
       def generate
-        return if mixins.empty? && attributes.empty?
+        return if mixins.empty? && secure_password.empty? && attributes.empty?
 
         format <<~RBS
           #{header}
           #{mixins}
+
+          #{secure_password}
 
           #{attributes}
           #{footer}
@@ -82,6 +85,28 @@ module RbsActivemodel
           else
             raise "unreachable"
           end
+        end.join("\n")
+      end
+
+      def secure_password
+        return "" if klass.ancestors.none?(::ActiveModel::SecurePassword::InstanceMethodsOnActivation)
+
+        methods = klass.instance_methods.grep(/^authenticate_/)
+        @secure_password ||= methods.filter_map do |method_name|
+          attribute = method_name.to_s.split("_").last
+          next unless klass.instance_methods.include?(:"#{attribute}_confirmation")
+
+          <<~RBS
+            attr_reader #{attribute}: String
+            attr_accessor #{attribute}_confirmation: String
+            attr_accessor #{attribute}_challenge: String
+
+            def #{attribute}=: (String) -> String
+            def #{attribute}_salt: () -> String
+            def authenticate_#{attribute}: (String) -> (instance | false)
+
+            #{"alias authenticate authenticate_password" if attribute == "password"}
+          RBS
         end.join("\n")
       end
 

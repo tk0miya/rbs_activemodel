@@ -118,14 +118,105 @@ RSpec.describe RbsActivemodel::ActiveModel do
         end
       end
 
-      context "When the class is a subclass of ActiveRecord::Base" do
-        let(:klass) do
-          Class.new(ActiveRecord::Base) do
-            attribute :name, :string
+      context "When the class includes ActiveModel::SecurePassword" do
+        context "When the class calls has_secure_password without any options" do
+          let(:klass) do
+            Class.new do
+              include ActiveModel::SecurePassword
+
+              has_secure_password
+            end
           end
+          let(:expected) do
+            <<~RBS
+              class Foo
+                include ::ActiveModel::SecurePassword
+                extend ::ActiveModel::SecurePassword::ClassMethods
+                include ::ActiveModel::Validations
+                extend ::ActiveModel::Validations::ClassMethods
+
+                attr_reader password: String
+                attr_accessor password_confirmation: String
+                attr_accessor password_challenge: String
+
+                def password=: (String) -> String
+                def password_salt: () -> String
+                def authenticate_password: (String) -> (instance | false)
+
+                alias authenticate authenticate_password
+              end
+            RBS
+          end
+
+          it { is_expected.to eq expected }
         end
 
-        it { is_expected.to eq nil }
+        context "When the class calls has_secure_password with attribute name" do
+          let(:klass) do
+            Class.new do
+              include ActiveModel::SecurePassword
+
+              has_secure_password :passphrase
+            end
+          end
+          let(:expected) do
+            <<~RBS
+              class Foo
+                include ::ActiveModel::SecurePassword
+                extend ::ActiveModel::SecurePassword::ClassMethods
+                include ::ActiveModel::Validations
+                extend ::ActiveModel::Validations::ClassMethods
+
+                attr_reader passphrase: String
+                attr_accessor passphrase_confirmation: String
+                attr_accessor passphrase_challenge: String
+
+                def passphrase=: (String) -> String
+                def passphrase_salt: () -> String
+                def authenticate_passphrase: (String) -> (instance | false)
+              end
+            RBS
+          end
+
+          it { is_expected.to eq expected }
+        end
+      end
+
+      context "When the class is a subclass of ActiveRecord::Base" do
+        context "When the class calls has_secure_password" do
+          let(:klass) do
+            Class.new(ActiveRecord::Base) do
+              has_secure_password
+            end
+          end
+          let(:expected) do
+            <<~RBS
+              class Foo < ::ActiveRecord::Base
+                attr_reader password: String
+                attr_accessor password_confirmation: String
+                attr_accessor password_challenge: String
+
+                def password=: (String) -> String
+                def password_salt: () -> String
+                def authenticate_password: (String) -> (instance | false)
+
+                alias authenticate authenticate_password
+              end
+            RBS
+          end
+
+          it { is_expected.to eq expected }
+        end
+
+        context "When the class does not call has_secure_password" do
+          let(:klass) do
+            Class.new(ActiveRecord::Base) do
+              attribute :name, :string
+            end
+          end
+
+          it { is_expected.to eq nil }
+        end
       end
     end
   end

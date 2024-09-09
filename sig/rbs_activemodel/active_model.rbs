@@ -20,6 +20,7 @@ module RbsActivemodel
 
       def format: (String rbs) -> String
       def header: () -> String
+      def secure_password: () -> String
       def mixins: () -> String
       def attributes: () -> String
       def footer: () -> String

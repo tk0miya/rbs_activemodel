@@ -3,8 +3,11 @@ AllCops:
 
 Metrics/BlockLength:
   Exclude:
-    - 'rbs_activemodel.gemspec'
-    - 'spec/**/*.rb'
+    - "rbs_activemodel.gemspec"
+    - "spec/**/*.rb"
+
+Metrics/ClassLength:
+  Max: 150
 
 Metrics/CyclomaticComplexity:
   Max: 10

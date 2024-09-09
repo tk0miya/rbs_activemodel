@@ -8,6 +8,7 @@ gemspec
 gem "rake", "~> 13.0"
 
 group :development do
+  gem "bcrypt"
   gem "rspec", require: false
   gem "rspec-daemon", require: false
   gem "rubocop", "~> 1.21"

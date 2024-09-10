@@ -135,7 +135,7 @@ RSpec.describe RbsActivemodel::ActiveModel do
                 include ::ActiveModel::Validations
                 extend ::ActiveModel::Validations::ClassMethods
 
-                attr_reader password: String
+                attr_reader password: String?
                 attr_accessor password_confirmation: String
                 attr_accessor password_challenge: String
 
@@ -167,7 +167,7 @@ RSpec.describe RbsActivemodel::ActiveModel do
                 include ::ActiveModel::Validations
                 extend ::ActiveModel::Validations::ClassMethods
 
-                attr_reader passphrase: String
+                attr_reader passphrase: String?
                 attr_accessor passphrase_confirmation: String
                 attr_accessor passphrase_challenge: String
 
@@ -192,7 +192,7 @@ RSpec.describe RbsActivemodel::ActiveModel do
           let(:expected) do
             <<~RBS
               class Foo < ::ActiveRecord::Base
-                attr_reader password: String
+                attr_reader password: String?
                 attr_accessor password_confirmation: String
                 attr_accessor password_challenge: String
 

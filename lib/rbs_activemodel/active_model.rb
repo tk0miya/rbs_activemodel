@@ -97,7 +97,7 @@ module RbsActivemodel
           next unless klass.instance_methods.include?(:"#{attribute}_confirmation")
 
           <<~RBS
-            attr_reader #{attribute}: String
+            attr_reader #{attribute}: String?
             attr_accessor #{attribute}_confirmation: String
             attr_accessor #{attribute}_challenge: String
 

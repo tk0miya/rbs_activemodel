@@ -7,6 +7,7 @@ module RbsActivemodel
       MIXINS: Array[Module]
       TYPES: Hash[Symbol, Class | String | Symbol]
 
+      @secure_password: String
       @mixins: String
       @attributes: String
 

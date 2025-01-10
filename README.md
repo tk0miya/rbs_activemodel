@@ -6,7 +6,7 @@ rbs_activemodel is a RBS generator for activemodel gem.
 
 Add a new entry to your Gemfile and run `bundle install`:
 
-   group :deveopment do
+   group :development do
      gem 'rbs_activemodel', require: false
    end
 

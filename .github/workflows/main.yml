@@ -30,6 +30,6 @@ jobs:
     - name: Run rspec
       run: bundle exec rspec
     - name: Run rbs validate
-      run: bundle exec rbs -I sig validate --silent
+      run: bundle exec rbs -I sig validate
     - name: Run steep
       run: bundle exec steep check

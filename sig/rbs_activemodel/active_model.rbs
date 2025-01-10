@@ -25,6 +25,7 @@ module RbsActivemodel
       def mixins: () -> String
       def attributes: () -> String
       def footer: () -> String
+      def having_default?: (String name) -> bool
       def required_attribute?: (String name) -> bool
     end
   end

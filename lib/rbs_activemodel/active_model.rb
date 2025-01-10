@@ -136,13 +136,20 @@ module RbsActivemodel
                       else
                         type.to_s
                       end
-          suffix = "?" unless required_attribute?(name)
+          suffix = "?" unless having_default?(name) || required_attribute?(name)
           <<~RBS
             %a{pure}
             def #{name}: () -> #{type_name}#{suffix}
             def #{name}=: (#{type_name}#{suffix} value) -> #{type_name}#{suffix}
           RBS
         end.join("\n")
+      end
+
+      def having_default?(name)
+        klass.instance_eval { pending_attribute_modifications }
+             .find do |mod|
+               mod.is_a?(::ActiveModel::AttributeRegistration::ClassMethods::PendingDefault) && mod.name == name
+             end
       end
 
       def required_attribute?(name)

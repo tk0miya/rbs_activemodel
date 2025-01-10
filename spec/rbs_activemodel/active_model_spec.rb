@@ -88,7 +88,36 @@ RSpec.describe RbsActivemodel::ActiveModel do
           it { is_expected.to eq expected }
         end
 
-        context "When the attribute is defined as required (optional)" do
+        context "When the attribute is defined as having defaults" do
+          let(:klass) do
+            Class.new do
+              include ActiveModel::Attributes
+
+              attribute :age, :integer, default: 20
+              attribute :nickname, :string, default: "John Doe"
+            end
+          end
+          let(:expected) do
+            <<~RBS
+              class Foo
+                include ::ActiveModel::Attributes
+                extend ::ActiveModel::Attributes::ClassMethods
+
+                %a{pure}
+                def age: () -> Integer
+                def age=: (Integer value) -> Integer
+
+                %a{pure}
+                def nickname: () -> String
+                def nickname=: (String value) -> String
+              end
+            RBS
+          end
+
+          it { is_expected.to eq expected }
+        end
+
+        context "When the attribute is defined as optional" do
           let(:klass) do
             Class.new do
               include ActiveModel::Attributes

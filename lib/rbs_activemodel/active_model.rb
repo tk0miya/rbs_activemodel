@@ -8,7 +8,7 @@ require "rbs"
 
 module RbsActivemodel
   module ActiveModel
-    def self.all
+    def self.all #: Array[Class]
       ObjectSpace.each_object.select do |obj|
         obj.is_a?(Class) && obj.ancestors.include?(::ActiveModel::Validations)
       rescue StandardError
@@ -16,13 +16,14 @@ module RbsActivemodel
       end
     end
 
-    def self.class_to_rbs(klass)
+    # @rbs klass: Class
+    def self.class_to_rbs(klass) #: String?
       Generator.new(klass).generate
     end
 
     class Generator
       MIXINS = [::ActiveModel::Model, ::ActiveModel::Attributes,
-                ::ActiveModel::SecurePassword, ::ActiveModel::Validations].freeze
+                ::ActiveModel::SecurePassword, ::ActiveModel::Validations].freeze #: Array[Module]
       TYPES = {
         big_integer: Integer,
         binary: String,
@@ -35,14 +36,19 @@ module RbsActivemodel
         integer: Integer,
         string: String,
         time: Time
-      }.freeze
+      }.freeze #: Hash[Symbol, Class | String | Symbol]
 
-      def initialize(klass)
+      # @rbs @secure_password: String
+      # @rbs @mixins: String
+      # @rbs @attributes: String
+
+      # @rbs klass: Class
+      def initialize(klass) #: void
         @klass = klass
         @klass_name = klass.name || ""
       end
 
-      def generate
+      def generate #: String?
         return if mixins.empty? && secure_password.empty? && attributes.empty?
 
         format <<~RBS
@@ -58,16 +64,18 @@ module RbsActivemodel
 
       private
 
-      attr_reader :klass, :klass_name
+      attr_reader :klass #: Class
+      attr_reader :klass_name #: String
 
-      def format(rbs)
+      # @rbs rbs: String
+      def format(rbs) #: String
         parsed = RBS::Parser.parse_signature(rbs)
         StringIO.new.tap do |out|
           RBS::Writer.new(out: out).write(parsed[1] + parsed[2])
         end.string
       end
 
-      def header
+      def header #: String
         namespace = +""
         klass_name.split("::").map do |mod_name|
           namespace += "::#{mod_name}"
@@ -88,7 +96,7 @@ module RbsActivemodel
         end.join("\n")
       end
 
-      def secure_password
+      def secure_password #: String
         return "" if klass.ancestors.none?(::ActiveModel::SecurePassword::InstanceMethodsOnActivation)
 
         methods = klass.instance_methods.grep(/^authenticate_/)
@@ -110,7 +118,7 @@ module RbsActivemodel
         end.join("\n")
       end
 
-      def mixins
+      def mixins #: String
         return "" if klass < ActiveRecord::Base
 
         @mixins ||= MIXINS.each_with_object([]) do |mod, mixins|
@@ -121,7 +129,7 @@ module RbsActivemodel
         end.join("\n")
       end
 
-      def attributes
+      def attributes #: String
         return "" unless klass < ::ActiveModel::Attributes
 
         # @type var model: untyped
@@ -145,14 +153,16 @@ module RbsActivemodel
         end.join("\n")
       end
 
-      def having_default?(name)
+      # @rbs name: String
+      def having_default?(name) #: bool
         klass.instance_eval { pending_attribute_modifications }
              .find do |mod|
                mod.is_a?(::ActiveModel::AttributeRegistration::ClassMethods::PendingDefault) && mod.name == name
              end
       end
 
-      def required_attribute?(name)
+      # @rbs name: String
+      def required_attribute?(name) #: bool
         return false unless klass < ::ActiveModel::Validations
 
         klass.validators.any? do |v| # steep:ignore NoMethod
@@ -160,7 +170,7 @@ module RbsActivemodel
         end
       end
 
-      def footer
+      def footer #: String
         "end\n" * klass.module_parents.size # steep:ignore
       end
     end

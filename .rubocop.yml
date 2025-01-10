@@ -1,6 +1,10 @@
 AllCops:
   TargetRubyVersion: 2.7
 
+Layout/LeadingCommentSpace:
+  AllowRBSInlineAnnotation: true
+  AllowSteepAnnotation: true
+
 Metrics/BlockLength:
   Exclude:
     - "rbs_activemodel.gemspec"

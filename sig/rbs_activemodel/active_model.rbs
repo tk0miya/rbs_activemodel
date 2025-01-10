@@ -1,32 +1,52 @@
+# Generated from lib/rbs_activemodel/active_model.rb with RBS::Inline
+
 module RbsActivemodel
   module ActiveModel
     def self.all: () -> Array[Class]
+
+    # @rbs klass: Class
     def self.class_to_rbs: (Class klass) -> String?
 
     class Generator
       MIXINS: Array[Module]
+
       TYPES: Hash[Symbol, Class | String | Symbol]
 
-      @secure_password: String
-      @mixins: String
       @attributes: String
 
+      @mixins: String
+
+      @secure_password: String
+
+      # @rbs klass: Class
       def initialize: (Class klass) -> void
+
       def generate: () -> String?
 
       private
 
       attr_reader klass: Class
+
       attr_reader klass_name: String
 
+      # @rbs rbs: String
       def format: (String rbs) -> String
+
       def header: () -> String
+
       def secure_password: () -> String
+
       def mixins: () -> String
+
       def attributes: () -> String
-      def footer: () -> String
+
+      # @rbs name: String
       def having_default?: (String name) -> bool
+
+      # @rbs name: String
       def required_attribute?: (String name) -> bool
+
+      def footer: () -> String
     end
   end
 end

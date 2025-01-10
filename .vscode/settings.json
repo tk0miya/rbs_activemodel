@@ -18,5 +18,7 @@
         "rubygems",
         "Takeshi",
         "tasklib"
-    ]
+    ],
+    "rbs-helper.rbs-inline-on-save": true,
+    "rbs-helper.rbs-inline-signature-directory": "sig/"
 }

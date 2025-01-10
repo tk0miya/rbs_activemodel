@@ -2,5 +2,21 @@
     "[ruby]": {
         "editor.defaultFormatter": "Shopify.ruby-lsp"
     },
-    "rbs-helper.signature-directory": "sig"
+    "rbs-helper.signature-directory": "sig",
+    "cSpell.words": [
+        "Activemodel",
+        "activerecord",
+        "bigdecimal",
+        "bindir",
+        "klass",
+        "KOMIYA",
+        "mkpath",
+        "popen",
+        "raketask",
+        "readlines",
+        "rmtree",
+        "rubygems",
+        "Takeshi",
+        "tasklib"
+    ]
 }

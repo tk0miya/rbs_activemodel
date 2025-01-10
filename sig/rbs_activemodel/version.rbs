@@ -1,0 +1,5 @@
+# Generated from lib/rbs_activemodel/version.rb with RBS::Inline
+
+module RbsActivemodel
+  VERSION: String
+end

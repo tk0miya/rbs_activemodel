@@ -1,0 +1,7 @@
+# Generated from lib/generators/rbs_activemodel/install_generator.rb with RBS::Inline
+
+module RbsActivemodel
+  class InstallGenerator < Rails::Generators::Base
+    def create_raketask: () -> void
+  end
+end

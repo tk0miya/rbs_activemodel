@@ -17,7 +17,8 @@
         "rmtree",
         "rubygems",
         "Takeshi",
-        "tasklib"
+        "tasklib",
+        "tk0miya"
     ],
     "rbs-helper.rbs-inline-on-save": true,
     "rbs-helper.rbs-inline-signature-directory": "sig/"

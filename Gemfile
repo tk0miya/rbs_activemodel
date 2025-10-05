@@ -12,7 +12,7 @@ group :development do
   gem "rbs-inline", require: false
   gem "rspec", require: false
   gem "rspec-daemon", require: false
-  gem "rubocop", "~> 1.74"
+  gem "rubocop", "~> 1.81"
   gem "ruby-lsp-rspec", require: false
   gem "steep", require: false
 end

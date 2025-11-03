@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "active_model"
 require "active_record"
+require "active_support/core_ext/integer" # Load integer extensions to avoid AM's error
 require "bigdecimal"
 require "date"
 require "rbs"

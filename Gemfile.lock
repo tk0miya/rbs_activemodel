@@ -177,6 +177,9 @@ GEM
     rubocop-ast (1.49.1)
       parser (>= 3.3.7.2)
       prism (~> 1.7)
+    rubocop-numbered-params (1.0.0)
+      lint_roller (~> 1.0)
+      rubocop (>= 1.72.1)
     rubocop-rbs_inline (1.5.5)
       lint_roller (~> 1.1)
       rbs-inline
@@ -238,10 +241,11 @@ DEPENDENCIES
   rspec
   rspec-daemon
   rubocop (~> 1.88)
+  rubocop-numbered-params
   rubocop-rbs_inline
   ruby-lsp-rspec
   sqlite3
   steep
 
 BUNDLED WITH
-   4.0.15
+  4.0.15

@@ -15,14 +15,14 @@ RSpec.describe RbsActivemodel::ActiveModel do
       stub_const("Foo", klass)
     end
 
-    context "When class is not a activemodel class" do
+    context "when class is not a activemodel class" do
       let(:klass) { Class.new }
 
-      it { is_expected.to eq nil }
+      it { is_expected.to be_nil }
     end
 
-    context "When class is a activemodel class" do
-      context "When the class includes ActiveModel::Model" do
+    context "when class is a activemodel class" do
+      context "when the class includes ActiveModel::Model" do
         let(:klass) do
           Class.new do
             include ActiveModel::Model
@@ -41,7 +41,7 @@ RSpec.describe RbsActivemodel::ActiveModel do
         it { is_expected.to eq expected }
       end
 
-      context "When the class includes ActiveModel::Validations" do
+      context "when the class includes ActiveModel::Validations" do
         let(:klass) do
           Class.new do
             include ActiveModel::Validations
@@ -59,8 +59,8 @@ RSpec.describe RbsActivemodel::ActiveModel do
         it { is_expected.to eq expected }
       end
 
-      context "When the class includes ActiveModel::Attributes" do
-        context "When the attribute is defined as required (presence)" do
+      context "when the class includes ActiveModel::Attributes" do
+        context "when the attribute is defined as required (presence)" do
           let(:klass) do
             Class.new do
               include ActiveModel::Attributes
@@ -89,7 +89,7 @@ RSpec.describe RbsActivemodel::ActiveModel do
           it { is_expected.to eq expected }
         end
 
-        context "When the attribute is defined as having defaults" do
+        context "when the attribute is defined as having defaults" do
           let(:klass) do
             Class.new do
               include ActiveModel::Attributes
@@ -118,7 +118,7 @@ RSpec.describe RbsActivemodel::ActiveModel do
           it { is_expected.to eq expected }
         end
 
-        context "When the attribute is defined as optional" do
+        context "when the attribute is defined as optional" do
           let(:klass) do
             Class.new do
               include ActiveModel::Attributes
@@ -148,8 +148,8 @@ RSpec.describe RbsActivemodel::ActiveModel do
         end
       end
 
-      context "When the class includes ActiveModel::SecurePassword" do
-        context "When the class calls has_secure_password without any options" do
+      context "when the class includes ActiveModel::SecurePassword" do
+        context "when the class calls has_secure_password without any options" do
           let(:klass) do
             Class.new do
               include ActiveModel::SecurePassword
@@ -181,7 +181,7 @@ RSpec.describe RbsActivemodel::ActiveModel do
           it { is_expected.to eq expected }
         end
 
-        context "When the class calls has_secure_password with attribute name" do
+        context "when the class calls has_secure_password with attribute name" do
           let(:klass) do
             Class.new do
               include ActiveModel::SecurePassword
@@ -212,8 +212,8 @@ RSpec.describe RbsActivemodel::ActiveModel do
         end
       end
 
-      context "When the class is a subclass of ActiveRecord::Base" do
-        context "When the class calls has_secure_password" do
+      context "when the class is a subclass of ActiveRecord::Base" do
+        context "when the class calls has_secure_password" do
           let(:klass) do
             Class.new(ActiveRecord::Base) do
               has_secure_password
@@ -238,14 +238,14 @@ RSpec.describe RbsActivemodel::ActiveModel do
           it { is_expected.to eq expected }
         end
 
-        context "When the class does not call has_secure_password" do
+        context "when the class does not call has_secure_password" do
           let(:klass) do
             Class.new(ActiveRecord::Base) do
               attribute :name, :string
             end
           end
 
-          it { is_expected.to eq nil }
+          it { is_expected.to be_nil }
         end
       end
     end

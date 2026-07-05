@@ -2,6 +2,7 @@ AllCops:
   TargetRubyVersion: 3.2
 
 plugins:
+  - rubocop-numbered-params
   - rubocop-rbs_inline
 
 Layout/LeadingCommentSpace:

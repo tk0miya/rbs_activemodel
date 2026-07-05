@@ -1,6 +1,9 @@
 AllCops:
   TargetRubyVersion: 3.2
 
+plugins:
+  - rubocop-rbs_inline
+
 Layout/LeadingCommentSpace:
   AllowRBSInlineAnnotation: true
   AllowSteepAnnotation: true
@@ -21,6 +24,15 @@ Metrics/MethodLength:
 
 Style/Documentation:
   Enabled: false
+
+Style/RbsInline/MissingTypeAnnotation:
+  EnforcedStyle: doc_style_and_return_annotation
+
+Style/RbsInline/RedundantTypeAnnotation:
+  EnforcedStyle: doc_style_and_return_annotation
+
+Style/RbsInline/RequireRbsInlineComment:
+  EnforcedStyle: never
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes

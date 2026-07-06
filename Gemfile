@@ -18,5 +18,6 @@ group :development do
   gem "rubocop-rbs_inline", require: false
   gem "rubocop-rspec", require: false
   gem "ruby-lsp-rspec", require: false
+  gem "sqlite3"
   gem "steep", require: false
 end

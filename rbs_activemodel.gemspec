@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
   spec.metadata["changelog_uri"] = spec.homepage
+  spec.metadata["rubygems_mfa_required"] = "true"
 
   gemspec = File.basename(__FILE__)
   spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
@@ -29,12 +30,10 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { File.basename(_1) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "activemodel", ">= 7.1"
-  spec.add_runtime_dependency "activerecord"
-  spec.add_runtime_dependency "railties"
-  spec.add_runtime_dependency "rbs"
-
-  spec.add_development_dependency "sqlite3"
+  spec.add_dependency "activemodel", ">= 7.1"
+  spec.add_dependency "activerecord"
+  spec.add_dependency "railties"
+  spec.add_dependency "rbs"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

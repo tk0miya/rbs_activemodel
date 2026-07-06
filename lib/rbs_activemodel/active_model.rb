@@ -71,7 +71,7 @@ module RbsActivemodel
       def format(rbs) #: String
         parsed = RBS::Parser.parse_signature(rbs)
         StringIO.new.tap do |out|
-          RBS::Writer.new(out: out).write(parsed[1] + parsed[2])
+          RBS::Writer.new(out:).write(parsed[1] + parsed[2])
         end.string
       end
 
@@ -102,7 +102,7 @@ module RbsActivemodel
         methods = klass.instance_methods.grep(/^authenticate_/)
         @secure_password ||= methods.filter_map do |method_name|
           attribute = method_name.to_s.split("_").last
-          next unless klass.instance_methods.include?(:"#{attribute}_confirmation")
+          next unless klass.method_defined?(:"#{attribute}_confirmation")
 
           <<~RBS
             attr_reader #{attribute}: String?

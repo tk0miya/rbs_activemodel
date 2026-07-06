@@ -10,7 +10,7 @@ module RbsActivemodel
 
     # @rbs name: Symbol
     # @rbs &block: ?(self) -> void
-    def initialize(name = :'rbs:activemodel', &block) #: void
+    def initialize(name = :"rbs:activemodel", &block) #: void
       super()
 
       @name = name

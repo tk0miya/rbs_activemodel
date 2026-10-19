@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rbs_activemodel (1.4.0)
-      activemodel (>= 7.1)
+      activemodel (>= 7.2)
       activerecord
       railties
       rbs

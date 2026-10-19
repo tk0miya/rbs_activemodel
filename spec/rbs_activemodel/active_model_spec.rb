@@ -118,6 +118,39 @@ RSpec.describe RbsActivemodel::ActiveModel do
           it { is_expected.to eq expected }
         end
 
+        context "when the attribute having defaults is defined in the superclass" do
+          let(:klass) do
+            parent = Class.new do
+              include ActiveModel::Attributes
+
+              attribute :age, :integer, default: 20
+            end
+            stub_const("Bar", parent)
+
+            Class.new(parent) do
+              attribute :nickname, :string
+            end
+          end
+          let(:expected) do
+            <<~RBS
+              class Foo < ::Bar
+                include ::ActiveModel::Attributes
+                extend ::ActiveModel::Attributes::ClassMethods
+
+                %a{pure}
+                def age: () -> Integer
+                def age=: (Integer value) -> Integer
+
+                %a{pure}
+                def nickname: () -> String?
+                def nickname=: (String? value) -> String?
+              end
+            RBS
+          end
+
+          it { is_expected.to eq expected }
+        end
+
         context "when the attribute is defined as optional" do
           let(:klass) do
             Class.new do

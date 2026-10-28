@@ -155,10 +155,9 @@ module RbsActivemodel
 
       # @rbs name: String
       def having_default?(name) #: bool
-        klass.instance_eval { pending_attribute_modifications }
-             .find do |mod|
-               mod.is_a?(::ActiveModel::AttributeRegistration::ClassMethods::PendingDefault) && mod.name == name
-             end
+        # @type var model: untyped
+        model = klass
+        model._default_attributes[name].is_a?(::ActiveModel::Attribute::UserProvidedDefault)
       end
 
       # @rbs name: String
